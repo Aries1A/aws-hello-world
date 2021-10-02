@@ -25,6 +25,20 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  HiFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hi/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /hi
+            Method: get
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -39,3 +53,13 @@ Outputs:
   HelloWorldFunctionIamRole:
     Description: "Implicit IAM Role created for Hello World function"
     Value: !GetAtt HelloWorldFunctionRole.Arn
+
+  HiApi:
+    Description: "API Gateway endpoint URL for Prod stage for hi function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hi/"
+  HiFunction:
+    Description: "Hi Lambda Function ARN"
+    Value: !GetAtt HiFunction.Arn
+  HiFunctionIamRole:
+    Description: "Implicit IAM Role created for Hi function"
+    Value: !GetAtt HiFunctionRole.Arn

@@ -9,4 +9,12 @@ architecture = "x86_64"
 packagetype = "Zip"
 functions = ["HelloWorldFunction"]
 
+[function_build_definitions.1c149ebf-860a-4f38-96d6-5ade1a6322ee]
+codeuri = "/Users/yuya/programming/private_developments/aws_study/hello-world/hi"
+runtime = "python3.9"
+source_md5 = ""
+architecture = "x86_64"
+packagetype = "Zip"
+functions = ["HiFunction"]
+
 [layer_build_definitions]
